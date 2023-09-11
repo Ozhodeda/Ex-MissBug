@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
+import { pdfService } from './services/PDFService.js'
 
 const app = express()
 // Express Config:
@@ -11,15 +12,14 @@ app.use(express.static('public'))
 
 
 
-
-
-
 // Get Cars (READ)
 app.get('/api/bug', (req, res) => {
     bugService.query()
         .then(bugs => {
+            pdfService.buildBugPDF(bugs)
             res.send(bugs)
         })
+        
         .catch(err => {
             loggerService.error('Cannot get bugs', err)
             res.status(400).send('Cannot get bugs')

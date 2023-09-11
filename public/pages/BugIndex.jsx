@@ -10,9 +10,9 @@ export function BugIndex() {
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
 
     useEffect(() => {
-       bugService.query(filterBy)
-       .then(bugs => setBugs(bugs))
-       .catch(err => console.log('err', err))
+        bugService.query(filterBy)
+            .then(bugs => setBugs(bugs))
+            .catch(err => console.log('err', err))
     }, [filterBy])
 
     function onSetFilterBy(filterBy) {
@@ -81,7 +81,7 @@ export function BugIndex() {
         <main>
             <h3>Bugs App</h3>
             <main>
-            <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
                 <button onClick={onAddBug}>Add Bug ⛐</button>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>
